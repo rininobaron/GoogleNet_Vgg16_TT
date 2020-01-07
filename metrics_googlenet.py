@@ -9,7 +9,7 @@
 # import the necessary packages
 import numpy as np
 from keras.utils import np_utils
-from keras.optimizers import Adam
+from keras.optimizers import Adam, Nadam, SGD, Adagrad, RMSprop
 from keras.preprocessing.image import ImageDataGenerator
 from keras.models import Sequential
 #from keras.layers.convolutional import Conv2D
@@ -407,41 +407,14 @@ googlenet_model.load_weights("/kaggle/working/googlenet.h5")
 
 googlenet_model.summary()
 
-# load model without output layer
-#model = googlenet_model(include_top=False)
+model = googlenet_model()
 
-# load minit data
+EPOCHS = 1000
+INIT_LR = 1e-3
 
+opt = Adam(lr=INIT_LR, decay=INIT_LR / EPOCHS)
 
-#Accedemos a las capas de googlenet_model
-print()
-print('Prueba1 (imprimiendo salida índice -5)')
-print(googlenet_model.layers[-5].output)
-print()
-print('Prueba2 (imprimiendo salidas índices hasta -5)')
-for i in range(0, len(googlenet_model.layers)-4):
-    print(i)
-    print(googlenet_model.layers[i].input)
-    print(googlenet_model.layers[i].output)
-    #new_model.add(googlenet_model.layers[i])
-print()
-
-#Creamos model1 sin las últimas 4 capas de googlenet_model
-model1 = Model(googlenet_model.input, googlenet_model.layers[-1].output)
-model1.summary()
-
-print()
-print(model1.output)
-print()
-
-#Creamos new_model como modelo secuencial
-model = Sequential()
-
-#obteniendo métricas
-
-model.add(model1)
-
-
+model.compile(loss="binary_crossentropy", optimizer=opt, metrics=["accuracy"])
 #Parámetros de Training
 
 p = model.predict(x_train)
