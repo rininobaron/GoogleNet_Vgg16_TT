@@ -29,6 +29,7 @@ from sklearn import metrics
 from keras.models import load_model
 import zipfile
 from skimage.transform import resize
+from numpy import where
 
 mega = Mega()
 
