@@ -26,7 +26,9 @@ from keras.models import Model, model_from_json
 import json
 from mega import Mega
 from sklearn import metrics
+from keras.models import load_model
 import zipfile
+from skimage.transform import resize
 
 mega = Mega()
 
