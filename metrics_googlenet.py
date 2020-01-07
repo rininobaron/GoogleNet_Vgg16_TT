@@ -26,6 +26,7 @@ from keras.models import Model, model_from_json
 import json
 from mega import Mega
 from sklearn import metrics
+import zipfile
 
 mega = Mega()
 
