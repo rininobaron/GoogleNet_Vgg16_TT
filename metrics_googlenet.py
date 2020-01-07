@@ -407,7 +407,7 @@ googlenet_model.load_weights("/kaggle/working/googlenet.h5")
 
 googlenet_model.summary()
 
-model = googlenet_model()
+model = googlenet_model
 
 EPOCHS = 1000
 INIT_LR = 1e-3
